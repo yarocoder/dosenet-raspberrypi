@@ -24,7 +24,12 @@ DEFAULT_CONFIG = '/home/pi/config/config.csv'
 DEFAULT_PUBLICKEY = '/home/pi/config/id_rsa_lbl.pub'
 DEFAULT_LOGFILE = '/home/pi/debug.log'
 DEFAULT_HOSTNAME = 'dosenet.dhcp.lbl.gov'
-DEFAULT_PORT = 5005
+DEFAULT_UDP_PORT = 5005
+DEFAULT_TCP_PORT = 5100
+DEFAULT_SENDER_MODE = 'udp'
+DEFAULT_DATALOG = '/home/pi/data-log.txt'
+DEFAULT_DATA_BACKLOG_FILE = '/home/pi/data_backlog_file.txt'
+DEFAULT_PROTOCOL = 'old'
 
 DEFAULT_INTERVAL_NORMAL = 300
 DEFAULT_INTERVAL_TEST = 30
