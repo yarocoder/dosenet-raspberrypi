@@ -19,8 +19,30 @@ Part 1: Define a function to update the interfaces file by replacing the
         line containing an indicated phrase with a new line.
 '''
 
+class network_update(object):
+    """
+    Define a parent class to update the network configuration for either the
+    interfaces file or the wpa supplicant file.
 
-def interfaces_update(rep_phrase, new_line):
+    Default: Network interfaces file
+    """
+
+    def __init__(self):
+        """Initialize the class variables."""
+
+        self.file = '/etc/network/interfaces'
+
+        pass
+
+    def uncomment(self, file, old_phrase, new_phrase):
+        """Uncomment out a line in the file of interest."""
+
+        file_update(self.file, )
+
+class interfaces_update(object):
+
+
+def file_update(file, rep_phrase, new_line):
     """Main function to update the network interfaces file."""
     '''
     Store the normal standard input and output. This allows us to restore
@@ -30,16 +52,17 @@ def interfaces_update(rep_phrase, new_line):
     temp_in = sys.stdin
     temp_out = sys.stdout
 
-    # Open the interfaces file for reading and open up a temporary file for
-    # writing using the standard input and output functions.
-    sys.stdin = open('/etc/network/interfaces', 'r')
+    '''
+    Open the interfaces file for reading and open up a temporary file for
+    writing using the standard input and output functions.
+    '''
+    sys.stdin = open(file, 'r')
     sys.stdout = open('~interfaces_temp', 'w')
 
     '''
     Loop through each line of the interfaces file to find the phrase of
     interest and replace it with the new line.
     '''
-
     for line in fileinput.input('/etc/network/interfaces'):
 
         # Search and find the phrase of interest to indicate the place in the
@@ -103,22 +126,22 @@ def dynamic_restore(static, netmask, gateway):
     Update the interfaces file with the dynamic IP by uncommenting out the
     dynamic IP call and commenting out the static IP calls.
     '''
-    interfaces_update('# replace for dynamic IP configuration', '')
-    interfaces_update('# iface eth0 inet dhcp', 'iface eth0 inet dhcp\n')
-    interfaces_update('auto eth0', '# auto eth0' + '\n')
-    interfaces_update('iface eth0 inet static', '# iface eth0 inet static' +
+    file_update('# replace for dynamic IP configuration', '')
+    file_update('# iface eth0 inet dhcp', 'iface eth0 inet dhcp\n')
+    file_update('auto eth0', '# auto eth0' + '\n')
+    file_update('iface eth0 inet static', '# iface eth0 inet static' +
                       '\n')
 
     # Update the interfaces file with the static IP by uncommenting out
     # the static IP call.
-    interfaces_update('  address {}'.format(static), '#   address\n')
+    file_update('  address {}'.format(static), '#   address\n')
 
     # Remove the netmask and gateway identifiers from the interfaces
     # file by commenting them out.
-    interfaces_update('  netmask {}'.format(netmask), '#   ' +
+    file_update('  netmask {}'.format(netmask), '#   ' +
                       'netmask\n')
 
-    interfaces_update('  gateway {}'.format(gateway), '#   ' +
+    file_update('  gateway {}'.format(gateway), '#   ' +
                       'gateway\n')
 
 '''
@@ -198,7 +221,7 @@ print('\nA backup of the network interfaces file has been made. If you ' +
 id = raw_input('\nWhat is the station ID?: ')
 
 # Update the station ID using the update function.
-interfaces_update('wireless-essid RPiAdHocNetwork', '  wireless-essid ' +
+file_update('wireless-essid RPiAdHocNetwork', '  wireless-essid ' +
                   'RPiAdHocNetwork{}'.format(id) + '\n')
 
 # Ask the user if they would like to use a static IP.
@@ -272,13 +295,13 @@ elif setup_static_ip.lower() == 'y':
 
     # Update the interfaces file with the static IP by commenting out the
     # dynamic IP call and uncommenting out the static IP calls.
-    interfaces_update('iface eth0 inet dhcp', '# replace for dynamic IP ' +
+    file_update('iface eth0 inet dhcp', '# replace for dynamic IP ' +
                       'configuration' + '\n' + '# iface eth0 inet dhcp' +
                       '\n')
-    interfaces_update('# auto eth0', 'auto eth0' + '\n')
-    interfaces_update('# iface eth0 inet static', 'iface eth0 inet static' +
+    file_update('# auto eth0', 'auto eth0' + '\n')
+    file_update('# iface eth0 inet static', 'iface eth0 inet static' +
                       '\n')
-    interfaces_update('#   address', '  address {}'.format(ip_static) + '\n')
+    file_update('#   address', '  address {}'.format(ip_static) + '\n')
 
     # Ask the user if they have a netmask.
     setup_netmask = raw_input('\nDo you have a netmask (y/n)?: ')
@@ -356,7 +379,7 @@ elif setup_static_ip.lower() == 'y':
 
         # Update the interfaces file with the netmask identifier by
         # uncommenting out the netmask call.
-        interfaces_update('#   netmask', '  netmask {}'.format(netmask_id) +
+        file_update('#   netmask', '  netmask {}'.format(netmask_id) +
                           '\n')
 
     # Ask the user if they have a gateway.
@@ -435,7 +458,7 @@ elif setup_static_ip.lower() == 'y':
 
         # Update the interfaces file with the gateway identifier by
         # uncommenting out the gateway call.
-        interfaces_update('#   gateway', '  gateway {}'.format(gateway_id) +
+        file_update('#   gateway', '  gateway {}'.format(gateway_id) +
                           '\n')
 
     # Ask the user if they have DNS servers connected.
@@ -518,7 +541,7 @@ elif setup_static_ip.lower() == 'y':
 
         # Update the interfaces file with the DNS server names by uncommenting
         # out the DNS server names call.
-        interfaces_update("#   dns-nameservers", "  dns-nameservers " +
+        file_update("#   dns-nameservers", "  dns-nameservers " +
                           "{} {}".format(dns_server_1, dns_server_2) + '\n')
 
 '''
