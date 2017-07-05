@@ -15,78 +15,178 @@ import sys
 
 
 '''
-Part 1: Define a function to update the interfaces file by replacing the
-        line containing an indicated phrase with a new line.
+Part 1: Define a class to update the network configuration by either commenting
+        or uncommenting out lines in either the interfaces or wpa supplicant
+        file. Update the file of interest by replacing the line containing an
+        indicated phrase with a new line.
 '''
 
 class network_update(object):
     """
-    Define a parent class to update the network configuration for either the
-    interfaces file or the wpa supplicant file.
-
-    Default: Network interfaces file
+    Define a base class to update the network configuration for the network
+    interfaces file.
     """
 
     def __init__(self):
         """Initialize the class variables."""
 
+        '''
+        Make the network interfaces file the file to update
+        (default for base class).
+        '''
         self.file = '/etc/network/interfaces'
 
-        pass
+    def file_update(self, rep_phrase, new_line):
+        """Main function to update file"""
+        '''
+        Store the normal standard input and output. This allows us to restore
+        them later to access the standard input and output for other uses
+        outside of this function, such as raw_input and print statements.
+        '''
+        temp_in = sys.stdin
+        temp_out = sys.stdout
 
-    def uncomment(self, file, old_phrase, new_phrase):
-        """Uncomment out a line in the file of interest."""
+        '''
+        Open the file for reading and open up a temporary file for
+        writing using the standard input and output functions.
+        '''
+        sys.stdin = open(self.file, 'r')
+        sys.stdout = open('~temp', 'w')
 
-        file_update(self.file, )
+        '''
+        Loop through each line of the file to find the phrase of
+        interest and replace it with the new line.
+        '''
+        for line in fileinput.input(self.file):
 
-class interfaces_update(object):
+            '''
+            Search and find the phrase of interest to indicate the place in the
+            code to replace the original line with the new line.
+            '''
+            if rep_phrase in line:
 
+                '''
+                Create a handle for a new line with the updated phrase to input
+                into the file.
+                '''
+                line = new_line
 
-def file_update(file, rep_phrase, new_line):
-    """Main function to update the network interfaces file."""
-    '''
-    Store the normal standard input and output. This allows us to restore
-    them later to access the standard input and output for other uses
-    outside of this function, such as raw_input and print statements.
-    '''
-    temp_in = sys.stdin
-    temp_out = sys.stdout
+            '''
+            Write the new line with the updated phrase in the temporary
+            file. Also copy all other lines.
+            '''
+            sys.stdout.write(line)
 
-    '''
-    Open the interfaces file for reading and open up a temporary file for
-    writing using the standard input and output functions.
-    '''
-    sys.stdin = open(file, 'r')
-    sys.stdout = open('~interfaces_temp', 'w')
+        '''
+        Move the updated file to replace the old file using root access.
+        '''
+        os.system('sudo mv ~temp {}'.format(self.file))
 
-    '''
-    Loop through each line of the interfaces file to find the phrase of
-    interest and replace it with the new line.
-    '''
-    for line in fileinput.input('/etc/network/interfaces'):
+        '''
+        Close the interfaces files for reading and writing
+        '''
+        sys.stdout.close()
 
-        # Search and find the phrase of interest to indicate the place in the
-        # code to replace the original line with the new line.
-        if rep_phrase in line:
+        '''
+        Return the original standard input and output to normal.
+        '''
+        sys.stdin = temp_in
+        sys.stdout = temp_out
 
-            # Create a handle for a new line with the updated phrase to input
-            # into the interfaces file.
-            line = new_line
+    def comment(self, phrase, prepend_line=None, address=None):
+        """Comment out a line containing the indicated phrase."""
 
-        # Write the new line with the updated phrase in the temporary
-        # interfaces file. Also copy all other lines.
-        sys.stdout.write(line)
+        '''
+        Initialize the old phrase and the new line strings as two inputs to the
+        file_update function in a convenient way for commenting out the old
+        phrase.
+        '''
+        old_phrase = phrase
+        new_line = '# ' + phrase
 
-    # Move the updated interfaces file to replace the old interfaces file
-    # using root access.
-    os.system('sudo mv ~interfaces_temp /etc/network/interfaces')
+        '''
+        If there is an address, append it to the old phrase string.
+        '''
+        if address != None:
+            old_phrase = old_phrase + ' {}'.format(address)
 
-    # Close the interfaces files for reading and writing
-    sys.stdout.close()
+        '''
+        If there is a prepend line, prepend it and a new line character to
+        the new line string.
+        '''
+        if prepend_line != None:
+            new_line = prepend_line + '\n' + new_line
 
-    # Return the original standard input and output to normal.
-    sys.stdin = temp_in
-    sys.stdout = temp_out
+        '''
+        Append a new line character to the end of the new line string to make
+        sure the new line is in fact added to the file as it's own line.
+        '''
+        new_line = new_line + '\n'
+
+        '''
+        Update the file.
+        '''
+        self.file_update(old_phrase, new_line)
+
+    def uncomment(self, phrase, *args):
+        """Uncomment out a line containing the indicated phrase."""
+
+        '''
+        Initialize the old phrase and the new line strings as two inputs to the
+        file_update function in a convenient way for uncommenting out the old
+        phrase.
+        '''
+        old_phrase = '# ' + phrase
+        new_line = phrase
+
+        '''
+        Concatenate the addresses to the new line, the implementation of which
+        depends on how many optional arguments are passed to this function.
+        '''
+        if len(args) == 1:
+            '''
+            For static IP, netmask and gateway addresses
+            '''
+            new_line = new_line + ' {}'.format(args[0])
+
+        elif len(args) == 2:
+            '''
+            For DNS servernames
+            '''
+            new_line = new_line + ' {} {}'.format(args[0], args[1])
+
+        '''
+        Append a new line character to the end of the new line string to make
+        sure the new line is in fact added to the file as it's own line.
+        '''
+        new_line = new_line + '\n'
+
+        '''
+        Update the file.
+        '''
+        self.file_update(old_phrase, new_line)
+
+    def delete_line(self, old_line):
+        """Delete a line containing the indicated phrase."""
+
+        self.file_update(old_line, '')
+
+    def append(self, phrase, address):
+        """
+        Append the address to the line containing the indicated phrase.
+
+        Note: Current functionality intended only for updating of the station
+              ID in the AdHoc network name.
+        """
+
+        '''
+        Initialize the old phrase and new line strings to be suitable to input
+        into the file_update function.
+        '''
+        old_phrase = phrase
+        new_line = phrase + '{}'.format(address) + '\n'
+
+        self.file_update(old_phrase, new_line)
 
 '''
 Part 2: Define a function to restore the backup of the interfaces file.
