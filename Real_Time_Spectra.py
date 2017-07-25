@@ -212,6 +212,8 @@ class Real_Time_Spectra(object):
         '''
         running_avg_array = sum(temp_data) / temp_length
 
+        print(running_avg_array.shape)
+
         '''
         Calculate the sum of the spectra.
         '''
