@@ -199,6 +199,8 @@ class Real_Time_Spectra(object):
         '''
         temp_data = np.array(data)
 
+        print(temp_data.shape)
+
         '''
         Save the original length of the temporary data queue.
         '''
