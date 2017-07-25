@@ -215,7 +215,7 @@ class Real_Time_Spectra(object):
         '''
         Calculate the sum of the spectra.
         '''
-        sum_data = np.sum(temp_data)
+        sum_data = np.sum(temp_data, 1)
 
         print(sum_data.shape)
 
