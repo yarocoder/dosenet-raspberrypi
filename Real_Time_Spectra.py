@@ -215,6 +215,8 @@ class Real_Time_Spectra(object):
         '''
         sum_data = sum(temp_data)
 
+        print(sum_data.shape)
+
         '''
         Return the running average and summation data.
         '''
@@ -351,7 +353,7 @@ class Real_Time_Spectra(object):
         plt.tight_layout()
 
         plt.show()
-        
+
         plt.pause(0.0005)
 
     def plot_sum(self):
