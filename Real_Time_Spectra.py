@@ -4,7 +4,7 @@ from __future__ import division, print_function
 import numpy as np
 # from pandas import DataFrame
 import matplotlib
-matplotlib.use('TkAgg')
+matplotlib.use('GTKAgg')
 # matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 # import matplotlib.gridspec.GridSpec as gspec
