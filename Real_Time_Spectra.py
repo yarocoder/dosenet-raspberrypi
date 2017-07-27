@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 # import seaborn as sns
 # from ggplot import *
 
-# from mpltools import style
+from mpltools import style
 # from mpltools import layout
 
 # import Tkinter
@@ -114,7 +114,7 @@ class Real_Time_Spectra(object):
         '''
         Use the ggplot style available though the mpltools layout method.
         '''
-        # style.use('ggplot')
+        style.use('ggplot')
 
         """
         Removes toolbar from figures.
