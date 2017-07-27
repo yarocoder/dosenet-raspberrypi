@@ -343,7 +343,7 @@ class Real_Time_Spectra(object):
         '''
         Clear the prior spectrum figure.
         '''
-        plt.clf()
+        # plt.clf()
 
         """
         Grabs the data for waterfall plot.
