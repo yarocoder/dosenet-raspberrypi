@@ -345,7 +345,7 @@ class Real_Time_Spectra(object):
         '''
         Clear the prior spectrum figure.
         '''
-        # plt.clf()
+        plt.clf()
 
         """
         Grabs the data for waterfall plot.
@@ -364,15 +364,17 @@ class Real_Time_Spectra(object):
         """
         Updates the colorbar by removing old colorbar.
         """
-        if self.colorbar_drawn:
+        # if self.colorbar_drawn:
+        #
+        #     self.cb = plt.colorbar()
+        #     self.colorbar_drawn = False
+        #
+        # if not self.colorbar_drawn:
+        #
+        #     self.cb.remove()
+        #     self.cb = plt.colorbar()
 
-            self.cb = plt.colorbar()
-            self.colorbar_drawn = False
-
-        if not self.colorbar_drawn:
-
-            self.cb.remove()
-            self.cb = plt.colorbar()
+        plt.colorbar()
 
         plt.tight_layout()
 
