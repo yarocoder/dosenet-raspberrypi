@@ -3,7 +3,8 @@ from __future__ import division, print_function
 # from globalvalues import DEFAULT_DATALOG_D3S
 import numpy as np
 # from pandas import DataFrame
-# import matplotlib
+import matplotlib
+matplotlib.use('TkAgg')
 # matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 # import matplotlib.gridspec.GridSpec as gspec
