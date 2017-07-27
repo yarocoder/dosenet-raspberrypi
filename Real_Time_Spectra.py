@@ -329,34 +329,9 @@ class Real_Time_Spectra(object):
         x = np.linspace(0, 4096, 256)
 
         '''
-        '''
-
-
-        '''
         Plot the spectrum plot.
         '''
         plt.plot(x, avg_data, drawstyle='steps-mid')
-
-        # '''
-        # Show the spectrum plot.
-        # '''
-        # plt.show()
-        #
-        # '''
-        # Wait before displaying another plot. Otherwise, wait the specified
-        # number of seconds before continuing with the code execution.
-        # '''
-        # plt.pause(0.0005)
-
-        '''
-        Update the plot with the new spectrum.
-        '''
-        plt.figure.canvas.update()
-
-        '''
-        Refresh the Qt events used to create the canvas.
-        '''
-        plt.figure.canvas.flush_events()
 
     def plot_waterfall(self):
 
@@ -365,10 +340,16 @@ class Real_Time_Spectra(object):
         '''
         plt.figure(1)
 
+        '''
+        Clear the prior spectrum figure.
+        '''
+        plt.clf()
+
         """
         Grabs the data for waterfall plot.
         """
         self.make_image()
+
         """
         Plots the data for the waterfall plot.
         """
@@ -400,12 +381,12 @@ class Real_Time_Spectra(object):
         '''
         Update the plot with the new spectrum.
         '''
-        plt.figure.canvas.update()
+        plt.figure(1).canvas.update()
 
         '''
         Refresh the Qt events used to create the canvas.
         '''
-        plt.figure.canvas.flush_events()
+        plt.figure(1).canvas.flush_events()
 
     def plot_sum(self):
         """
@@ -434,14 +415,23 @@ class Real_Time_Spectra(object):
         '''
         self.sum_graph(run_avg, sum_data)
 
-        '''
-        Show the updated spectrum figure window.
-        '''
+        # '''
+        # Show the spectrum plot.
+        # '''
         # plt.show()
-
-        '''
-        Pause before displaying the next figure window.
-        '''
+        #
+        # '''
+        # Wait before displaying another plot. Otherwise, wait the specified
+        # number of seconds before continuing with the code execution.
+        # '''
         # plt.pause(0.0005)
 
-        # plt.close()
+        '''
+        Update the plot with the new spectrum.
+        '''
+        plt.figure(2).canvas.update()
+
+        '''
+        Refresh the Qt events used to create the canvas.
+        '''
+        plt.figure(2).canvas.flush_events()
