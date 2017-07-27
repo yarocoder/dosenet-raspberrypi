@@ -6,6 +6,7 @@ import numpy as np
 # import matplotlib
 # matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
+# import matplotlib.gridspec.GridSpec as gspec
 # import seaborn as sns
 # from ggplot import *
 from mpltools import style
@@ -142,9 +143,20 @@ class Real_Time_Spectra(object):
         self.setup_window_geo(0.08, 0.32, 0.36, 0.36)
 
         '''
-        Draw the blank canvas figure for the spectrum plot and store it as the
-        second figure window.
+        Show the blank plot without blocking further changes to the figure
+        window. Allows for fast updating of the figure later.
         '''
+        plt.show(block=False)
+
+        # '''
+        # Draw the blank canvas figure for the spectrum plot and store it as the
+        # second figure window.
+        # '''
+        # plt.figure(2), (axis_1, axis_2) = plt.subplots(2, 1,
+        #                                     gridspec_kw={'nrows': 2,
+        #                                                  'ncols': 1,
+        #                                                  'height_ratios': [4, 1]})
+
         plt.figure(2)
 
         '''
@@ -152,6 +164,12 @@ class Real_Time_Spectra(object):
         factors.
         '''
         self.setup_window_geo(0.56, 0.32, 0.36, 0.36)
+
+        '''
+        Show the blank plot without blocking further changes to the figure
+        window. Allows for fast updating of the figure later.
+        '''
+        plt.show(block=False)
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -280,7 +298,7 @@ class Real_Time_Spectra(object):
 
         return new_array
 
-    def sum_graph(self, data):
+    def sum_graph(self, avg_data):
         """Prepares plot for sum graph."""
 
         '''
@@ -311,23 +329,42 @@ class Real_Time_Spectra(object):
         x = np.linspace(0, 4096, 256)
 
         '''
+        '''
+
+
+        '''
         Plot the spectrum plot.
         '''
-        plt.plot(x, data, drawstyle='steps-mid')
+        plt.plot(x, avg_data, drawstyle='steps-mid')
+
+        # '''
+        # Show the spectrum plot.
+        # '''
+        # plt.show()
+        #
+        # '''
+        # Wait before displaying another plot. Otherwise, wait the specified
+        # number of seconds before continuing with the code execution.
+        # '''
+        # plt.pause(0.0005)
 
         '''
-        Show the spectrum plot.
+        Update the plot with the new spectrum.
         '''
-        plt.show()
+        plt.figure.canvas.update()
 
         '''
-        Wait before displaying another plot. Otherwise, wait the specified
-        number of seconds before continuing with the code execution.
+        Refresh the Qt events used to create the canvas.
         '''
-        plt.pause(0.0005)
+        plt.figure.canvas.flush_events()
 
     def plot_waterfall(self):
+
+        '''
+        Switch to the waterfall figure window.
+        '''
         plt.figure(1)
+
         """
         Grabs the data for waterfall plot.
         """
@@ -356,9 +393,19 @@ class Real_Time_Spectra(object):
 
         plt.tight_layout()
 
-        plt.show()
+        # plt.show()
+        #
+        # plt.pause(0.0005)
 
-        plt.pause(0.0005)
+        '''
+        Update the plot with the new spectrum.
+        '''
+        plt.figure.canvas.update()
+
+        '''
+        Refresh the Qt events used to create the canvas.
+        '''
+        plt.figure.canvas.flush_events()
 
     def plot_sum(self):
         """
@@ -375,7 +422,7 @@ class Real_Time_Spectra(object):
         '''
         Get the running average
         '''
-        run_avg, self.sum_data = self.run_avg_data(self.queue, self.maxspectra)
+        run_avg, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
         Clear the prior spectrum figure.
@@ -385,16 +432,16 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum figure
         '''
-        self.sum_graph(run_avg)
+        self.sum_graph(run_avg, sum_data)
 
         '''
         Show the updated spectrum figure window.
         '''
-        plt.show()
+        # plt.show()
 
         '''
         Pause before displaying the next figure window.
         '''
-        plt.pause(0.0005)
+        # plt.pause(0.0005)
 
         # plt.close()
