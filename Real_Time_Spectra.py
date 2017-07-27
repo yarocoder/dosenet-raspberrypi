@@ -10,8 +10,9 @@ import matplotlib.pyplot as plt
 # import matplotlib.gridspec.GridSpec as gspec
 # import seaborn as sns
 # from ggplot import *
-from mpltools import style
-from mpltools import layout
+
+# from mpltools import style
+# from mpltools import layout
 
 # import Tkinter
 # from PySide.QtGui import QApplication
@@ -113,7 +114,7 @@ class Real_Time_Spectra(object):
         '''
         Use the ggplot style available though the mpltools layout method.
         '''
-        style.use('ggplot')
+        # style.use('ggplot')
 
         """
         Removes toolbar from figures.
