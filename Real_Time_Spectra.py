@@ -298,7 +298,7 @@ class Real_Time_Spectra(object):
 
         return new_array
 
-    def sum_graph(self, avg_data):
+    def sum_graph(self, avg_data, sum_data):
         """Prepares plot for sum graph."""
 
         '''
@@ -403,7 +403,7 @@ class Real_Time_Spectra(object):
         '''
         Get the running average
         '''
-        run_avg, sum_data = self.run_avg_data(self.queue, self.maxspectra)
+        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
         Clear the prior spectrum figure.
@@ -413,7 +413,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum figure
         '''
-        self.sum_graph(run_avg, sum_data)
+        self.sum_graph(avg_data, sum_data)
 
         # '''
         # Show the spectrum plot.
