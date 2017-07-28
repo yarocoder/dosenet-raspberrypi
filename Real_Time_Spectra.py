@@ -8,9 +8,8 @@ matplotlib.use('GTKAgg')
 # matplotlib.use('TkAgg')
 # matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
-# import matplotlib.gridspec.GridSpec as gspec
-# import seaborn as sns
-# from ggplot import *
+
+import gc
 
 from mpltools import style
 # from mpltools import layout
@@ -440,3 +439,5 @@ class Real_Time_Spectra(object):
         Refresh the Qt events used to create the canvas.
         '''
         plt.figure(2).canvas.flush_events()
+
+        gc.collect()
