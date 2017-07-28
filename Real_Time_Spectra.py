@@ -392,6 +392,8 @@ class Real_Time_Spectra(object):
         '''
         plt.figure(1).canvas.flush_events()
 
+        gc.collect()
+
     def plot_sum(self):
         """
         Plot the sum (spectrum) figure.
