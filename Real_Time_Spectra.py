@@ -4,8 +4,8 @@ from __future__ import division, print_function
 import numpy as np
 # from pandas import DataFrame
 import matplotlib
-# matplotlib.use('GTKAgg')
-matplotlib.use('TkAgg')
+matplotlib.use('GTKAgg')
+# matplotlib.use('TkAgg')
 # matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 # import matplotlib.gridspec.GridSpec as gspec
@@ -406,14 +406,14 @@ class Real_Time_Spectra(object):
         plt.figure(2)
 
         '''
-        Get the running average
-        '''
-        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
-
-        '''
         Clear the prior spectrum figure.
         '''
         plt.clf()
+
+        '''
+        Get the running average
+        '''
+        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
         Plot the spectrum figure
