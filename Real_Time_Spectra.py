@@ -50,6 +50,9 @@ class Real_Time_Spectra(object):
 
         self.colorbar_drawn = True
 
+        self.waterfall_drawn = False
+        self.spectrum_drawn = False
+
         '''
         Start up the plotting windows.
         '''
@@ -159,6 +162,14 @@ class Real_Time_Spectra(object):
         #                                                  'ncols': 1,
         #                                                  'height_ratios': [4, 1]})
 
+        '''
+        Store the background to the waterfall plot.
+        '''
+        self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(plt.axis.bbox)
+
+        '''
+        Setup the plot for the spectrum graph.
+        '''
         plt.figure(2)
 
         '''
@@ -172,6 +183,11 @@ class Real_Time_Spectra(object):
         window. Allows for fast updating of the figure later.
         '''
         plt.show(block=False)
+
+        '''
+        Store the background to the spectrum plot.
+        '''
+        self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.axis.bbox)
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -328,12 +344,12 @@ class Real_Time_Spectra(object):
         '''
         Create the x-axis data for the spectrum plot.
         '''
-        x = np.linspace(0, 4096, 256)
+        self.spectrum_bins = np.linspace(0, 4096, 256)
 
         '''
         Plot the spectrum plot.
         '''
-        plt.plot(x, avg_data, drawstyle='steps-mid')
+        self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
     def plot_waterfall(self):
 
@@ -417,9 +433,25 @@ class Real_Time_Spectra(object):
         avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
-        Plot the spectrum figure
+        Plot the spectrum figure fresh if it hasn't been plotted before.
         '''
-        self.sum_graph(avg_data, sum_data)
+        if self.spectrum_drawn:
+
+            self.sum_graph(avg_data, sum_data)
+
+        '''
+        Otherwise, just update the x and y data, restore the background to the
+        plot, redraw the plot contents and fill the plot window.
+        '''
+        else:
+
+            self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
+
+            plt.figure(2).canvas.restore_region(self.spectrum_background)
+
+            plt.axis.draw_artist(self.spectrum_plot)
+
+            plt.figure(2).canvas.blit(plt.axis.bbox)
 
         # '''
         # Show the spectrum plot.
@@ -432,14 +464,17 @@ class Real_Time_Spectra(object):
         # '''
         # plt.pause(0.0005)
 
-        '''
-        Update the plot with the new spectrum.
-        '''
-        plt.figure(2).canvas.update()
+        # '''
+        # Update the plot with the new spectrum.
+        # '''
+        # plt.figure(2).canvas.update()
+        #
+        # '''
+        # Refresh the Qt events used to create the canvas.
+        # '''
+        # plt.figure(2).canvas.flush_events()
 
         '''
-        Refresh the Qt events used to create the canvas.
+        Collect the figure window cache.
         '''
-        plt.figure(2).canvas.flush_events()
-
         gc.collect()
