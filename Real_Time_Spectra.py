@@ -414,8 +414,10 @@ class Real_Time_Spectra(object):
         """
         Plot the sum (spectrum) figure.
         """
-
-        # plt.figure(figsize=(25,15))
+        '''
+        Get the running average
+        '''
+        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
         Point to the figure window for the spectrum plot.
@@ -428,11 +430,6 @@ class Real_Time_Spectra(object):
         plt.clf()
 
         '''
-        Get the running average
-        '''
-        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
-
-        '''
         Plot the spectrum figure fresh if it hasn't been plotted before.
 
         Otherwise, just update the x and y data, restore the background to the
@@ -442,13 +439,13 @@ class Real_Time_Spectra(object):
 
             self.sum_graph(avg_data, sum_data)
 
-            self.spectrum_drawn = True
-
             # plt.figure(2).canvas.draw()
 
-            plt.show(False)
+            # plt.show(False)
 
             plt.draw()
+
+            self.spectrum_drawn = True
 
         else:
 
