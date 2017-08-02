@@ -439,11 +439,11 @@ class Real_Time_Spectra(object):
 
             self.sum_graph(avg_data, sum_data)
 
-            # plt.figure(2).canvas.draw()
+            plt.figure(2).canvas.draw()
 
             # plt.show(False)
 
-            plt.figure(2).draw()
+            # plt.draw()
 
             self.spectrum_drawn = True
 
