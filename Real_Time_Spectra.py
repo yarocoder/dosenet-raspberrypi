@@ -439,7 +439,7 @@ class Real_Time_Spectra(object):
 
             self.sum_graph(avg_data, sum_data)
 
-            canvas_draw = plt.figure(2).canvas.draw()
+            self.spectrum_canvas_draw = plt.figure(2).canvas.draw()
 
             # plt.show(False)
 
@@ -448,8 +448,8 @@ class Real_Time_Spectra(object):
             self.spectrum_drawn = True
 
         else:
-            
-            canvas_draw
+
+            self.spectrum_canvas_draw
 
             self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
 
