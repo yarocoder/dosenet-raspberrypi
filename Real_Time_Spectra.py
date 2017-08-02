@@ -349,7 +349,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
-        self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
+        self.spectrum_plot, _ = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
     def plot_waterfall(self):
 
@@ -434,9 +434,6 @@ class Real_Time_Spectra(object):
 
         '''
         Plot the spectrum figure fresh if it hasn't been plotted before.
-
-        Otherwise, just update the x and y data, restore the background to the
-        plot, redraw the plot contents and fill the plot window.
         '''
         if self.spectrum_drawn == False:
 
@@ -444,15 +441,23 @@ class Real_Time_Spectra(object):
 
             self.spectrum_drawn = True
 
-            plt.figure(2).canvas.draw()
+            # plt.figure(2).canvas.draw()
 
-            plt.gca().draw_artist(self.spectrum_plot[0])
+            plt.show(False)
 
+            plt.draw()
+
+        '''
+        Otherwise, just update the x and y data, restore the background to the
+        plot, redraw the plot contents and fill the plot window.
+        '''
         else:
 
-            self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
+            self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
 
             plt.figure(2).canvas.restore_region(self.spectrum_background)
+
+            plt.gca().draw_artist(self.spectrum_plot)
 
             plt.figure(2).canvas.blit(plt.gca().bbox)
 
