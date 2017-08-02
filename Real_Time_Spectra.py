@@ -165,7 +165,7 @@ class Real_Time_Spectra(object):
         '''
         Store the background to the waterfall plot.
         '''
-        self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(plt.axis.bbox)
+        self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(plt.figure(1).axis.bbox)
 
         '''
         Setup the plot for the spectrum graph.
@@ -187,7 +187,7 @@ class Real_Time_Spectra(object):
         '''
         Store the background to the spectrum plot.
         '''
-        self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.axis.bbox)
+        self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.figure(2).axis.bbox)
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -449,9 +449,9 @@ class Real_Time_Spectra(object):
 
             plt.figure(2).canvas.restore_region(self.spectrum_background)
 
-            plt.axis.draw_artist(self.spectrum_plot)
+            plt.figure(2).axis.draw_artist(self.spectrum_plot)
 
-            plt.figure(2).canvas.blit(plt.axis.bbox)
+            plt.figure(2).canvas.blit(plt.figure(2).axis.bbox)
 
         # '''
         # Show the spectrum plot.
