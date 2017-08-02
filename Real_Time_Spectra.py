@@ -447,11 +447,11 @@ class Real_Time_Spectra(object):
         # '''
         else:
 
-            self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
+            self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
 
             plt.figure(2).canvas.restore_region(self.spectrum_background)
 
-            plt.gca().draw_artist(self.spectrum_plot)
+            plt.gca().draw_artist(self.spectrum_plot[0])
 
             plt.figure(2).canvas.blit(plt.gca().bbox)
 
