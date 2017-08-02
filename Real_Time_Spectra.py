@@ -449,7 +449,7 @@ class Real_Time_Spectra(object):
 
         else:
 
-            # self.spectrum_canvas_draw
+            self.spectrum_canvas_draw
 
             self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
 
