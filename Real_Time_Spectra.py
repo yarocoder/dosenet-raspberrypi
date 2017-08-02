@@ -439,10 +439,10 @@ class Real_Time_Spectra(object):
 
             self.sum_graph(avg_data, sum_data)
 
-        '''
-        Otherwise, just update the x and y data, restore the background to the
-        plot, redraw the plot contents and fill the plot window.
-        '''
+        # '''
+        # Otherwise, just update the x and y data, restore the background to the
+        # plot, redraw the plot contents and fill the plot window.
+        # '''
         else:
 
             self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
