@@ -435,7 +435,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum figure fresh if it hasn't been plotted before.
         '''
-        if self.spectrum_drawn = False:
+        if self.spectrum_drawn == False:
 
             self.sum_graph(avg_data, sum_data)
 
