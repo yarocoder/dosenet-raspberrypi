@@ -434,6 +434,9 @@ class Real_Time_Spectra(object):
 
         '''
         Plot the spectrum figure fresh if it hasn't been plotted before.
+
+        Otherwise, just update the x and y data, restore the background to the
+        plot, redraw the plot contents and fill the plot window.
         '''
         if self.spectrum_drawn == False:
 
@@ -447,10 +450,6 @@ class Real_Time_Spectra(object):
 
             plt.draw()
 
-        '''
-        Otherwise, just update the x and y data, restore the background to the
-        plot, redraw the plot contents and fill the plot window.
-        '''
         else:
 
             self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
