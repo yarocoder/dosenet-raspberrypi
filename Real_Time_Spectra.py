@@ -182,7 +182,8 @@ class Real_Time_Spectra(object):
         Show the blank plot without blocking further changes to the figure
         window. Allows for fast updating of the figure later.
         '''
-        plt.show(block=False)
+        plt.draw()
+        # plt.show(block=False)
 
         '''
         Store the background to the spectrum plot.
@@ -442,8 +443,6 @@ class Real_Time_Spectra(object):
             # plt.figure(2).canvas.draw()
 
             # plt.show(False)
-
-            plt.draw()
 
             self.spectrum_drawn = True
 
