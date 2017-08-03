@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib
 # matplotlib.use('GTKAgg')
 # matplotlib.use('TkAgg')
-# matplotlib.use('Qt4Agg')
+matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 
 import gc
