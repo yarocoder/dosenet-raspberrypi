@@ -449,21 +449,31 @@ class Real_Time_Spectra(object):
 
             self.spectrum_drawn = True
 
-        else:
+        elif self.spectrum_drawn == True:
 
-            # self.spectrum_canvas_draw
+            # # self.spectrum_canvas_draw
+            #
+            # self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
+            #
+            # plt.figure(2).canvas.restore_region(self.spectrum_background)
+            #
+            # print(plt.figure(2).axes)
+            #
+            # # plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
+            #
+            # # plt.gca().draw_artist(self.spectrum_plot[0])
+            #
+            # plt.figure(2).canvas.blit(plt.gca().bbox)
 
-            self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
+            '''
+            Update the plot with the new spectrum.
+            '''
+            plt.figure(2).canvas.update()
 
-            plt.figure(2).canvas.restore_region(self.spectrum_background)
-
-            print(plt.figure(2).axes)
-
-            # plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
-
-            # plt.gca().draw_artist(self.spectrum_plot[0])
-
-            plt.figure(2).canvas.blit(plt.gca().bbox)
+            '''
+            Refresh the Qt events used to create the canvas.
+            '''
+            plt.figure(2).canvas.flush_events()
 
         # '''
         # Show the spectrum plot.
@@ -475,16 +485,6 @@ class Real_Time_Spectra(object):
         # number of seconds before continuing with the code execution.
         # '''
         # plt.pause(0.0005)
-
-        # '''
-        # Update the plot with the new spectrum.
-        # '''
-        # plt.figure(2).canvas.update()
-        #
-        # '''
-        # Refresh the Qt events used to create the canvas.
-        # '''
-        # plt.figure(2).canvas.flush_events()
 
         '''
         Collect the figure window cache.
