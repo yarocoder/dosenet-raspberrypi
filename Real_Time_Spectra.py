@@ -457,7 +457,9 @@ class Real_Time_Spectra(object):
 
             plt.figure(2).canvas.restore_region(self.spectrum_background)
 
-            plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
+            print(plt.figure(2).axes)
+
+            # plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
 
             # plt.gca().draw_artist(self.spectrum_plot[0])
 
