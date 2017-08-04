@@ -163,7 +163,7 @@ class Real_Time_Spectra(object):
         '''
         Setup the plot for the spectrum graph.
         '''
-        plt.figure(2)
+        plt.figure(2), self.spectrum_axis = plt.subplots()
 
         '''
         Change the window geometry (position and size) using the proper scaling
@@ -175,13 +175,8 @@ class Real_Time_Spectra(object):
         Show the blank plot without blocking further changes to the figure
         window. Allows for fast updating of the figure later.
         '''
-        plt.figure(2).canvas.draw()
-        # plt.show(block=False)
-
-        '''
-        Store the background to the spectrum plot.
-        '''
-        self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
+        plt.show(block=False)
+        # plt.figure(2).canvas.draw()
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -343,8 +338,8 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
-        # self.spectrum_plot = self.spectrum_plot_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
-        self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
+        self.spectrum_plot, _ = self.spectrum_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
+        # self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
     def plot_waterfall(self):
 
@@ -436,11 +431,17 @@ class Real_Time_Spectra(object):
 
             print(plt.figure(2).axes)
 
-            # plt.figure(2).canvas.draw()
-
             # self.spectrum_canvas_draw = plt.figure(2).canvas.draw_idle()
 
-            # plt.show(False)
+            plt.show(False)
+
+            plt.figure(2).canvas.draw()
+
+            '''
+            Store the background to the spectrum plot.
+            '''
+            self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(self.spectrum_plot.bbox)
+            # self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
 
             # plt.draw()
 
@@ -450,17 +451,19 @@ class Real_Time_Spectra(object):
 
             # self.spectrum_canvas_draw
 
-            self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
+            self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
 
             plt.figure(2).canvas.restore_region(self.spectrum_background)
 
             print(plt.figure(2).axes)
 
-            plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
+            self.spectrum_axis.draw_artist(self.spectrum_plot)
+            # plt.figure(2).axes[0].draw_artist(self.spectrum_plot)
 
-            # plt.gca().draw_artist(self.spectrum_plot[0])
+            # plt.gca().draw_artist(self.spectrum_plot)
 
-            plt.figure(2).canvas.blit(plt.figure(2).axes[0].bbox)
+            plt.figure(2).canvas.blit(self.spectrum_axis.bbox)
+            # plt.figure(2).canvas.blit(plt.figure(2).axes[0].bbox)
 
             # plt.figure(2).canvas.blit(plt.gca().bbox)
 
