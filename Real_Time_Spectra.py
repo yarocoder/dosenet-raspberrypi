@@ -464,6 +464,8 @@ class Real_Time_Spectra(object):
         # '''
         # plt.clf()
 
+        plt.cla()
+
         '''
         Plot the spectrum figure fresh if it hasn't been plotted before.
 
