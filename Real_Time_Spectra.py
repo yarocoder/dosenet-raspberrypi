@@ -181,7 +181,7 @@ class Real_Time_Spectra(object):
         '''
         Store the background to the spectrum plot.
         '''
-        # self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
+        self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -452,7 +452,7 @@ class Real_Time_Spectra(object):
 
             self.spectrum_plot[0].set_data(self.spectrum_bins, avg_data)
 
-            # plt.figure(2).canvas.restore_region(self.spectrum_background)
+            plt.figure(2).canvas.restore_region(self.spectrum_background)
 
             print(plt.figure(2).axes)
 
