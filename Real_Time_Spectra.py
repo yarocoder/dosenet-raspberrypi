@@ -349,7 +349,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
-        self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid', animated=True)
+        self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
     def plot_waterfall(self):
 
