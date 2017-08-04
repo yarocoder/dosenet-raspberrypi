@@ -435,11 +435,11 @@ class Real_Time_Spectra(object):
         Otherwise, just update the x and y data, restore the background to the
         plot, redraw the plot contents and fill the plot window.
         '''
-        if self.spectrum_drawn == False:
+        # if self.spectrum_drawn == False:
 
             self.sum_graph(avg_data, sum_data)
 
-            plt.figure(2).canvas.draw()
+            # plt.figure(2).canvas.draw()
 
             # self.spectrum_canvas_draw = plt.figure(2).canvas.draw_idle()
 
@@ -449,7 +449,7 @@ class Real_Time_Spectra(object):
 
             self.spectrum_drawn = True
 
-        elif self.spectrum_drawn == True:
+        # elif self.spectrum_drawn == True:
 
             # # self.spectrum_canvas_draw
             #
