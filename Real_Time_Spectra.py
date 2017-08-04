@@ -82,16 +82,7 @@ class Real_Time_Spectra(object):
         height = int(height_scaling * self.screen_height)
 
         '''
-        Apply the changes to the window geometry.if self.colorbar_drawn:
-
-            self.cb = plt.colorbar()
-            self.colorbar_drawn = False
-
-        if not self.colorbar_drawn:
-
-            self.cb.remove()
-            self.cb = plt.colorbar()
-
+        Apply the changes to the window geometry.
         '''
         plot_manager.window.setGeometry(x_pos, y_pos, width, height)
 
@@ -157,15 +148,17 @@ class Real_Time_Spectra(object):
         # Draw the blank canvas figure for the spectrum plot and store it as the
         # second figure window.
         # '''
-        # plt.figure(2), (axis_1, axis_2) = plt.subplots(2, 1,
-        #                                     gridspec_kw={'nrows': 2,
-        #                                                  'ncols': 1,
-        #                                                  'height_ratios': [4, 1]})
+        # plt.figure(2), \
+        #     (self.spectrum_plot_axis, \
+        #      self.spectrum_sumplot_axis) = plt.subplots(2, 1,
+        #                                 gridspec_kw={'nrows': 2,
+        #                                              'ncols': 1,
+        #                                              'height_ratios': [4, 1]})
 
-        '''
-        Store the background to the waterfall plot.
-        '''
-        self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(plt.gca().bbox)
+        # '''
+        # Store the background to the waterfall plot.
+        # '''
+        # self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(plt.gca().bbox)
 
         '''
         Setup the plot for the spectrum graph.
@@ -182,12 +175,13 @@ class Real_Time_Spectra(object):
         Show the blank plot without blocking further changes to the figure
         window. Allows for fast updating of the figure later.
         '''
-        plt.show(block=False)
+        plt.figure(2).canvas.draw()
+        # plt.show(block=False)
 
         '''
         Store the background to the spectrum plot.
         '''
-        self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
+        # self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -349,6 +343,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
+        # self.spectrum_plot = self.spectrum_plot_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
         self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
     def plot_waterfall(self):
@@ -377,9 +372,9 @@ class Real_Time_Spectra(object):
                                          extent=[1, 4096, 0,
                                          np.shape(self.data)[0]
                                          * self.interval])
-        """
-        Updates the colorbar by removing old colorbar.
-        """
+        # """
+        # Updates the colorbar by removing old colorbar.
+        # """
         # if self.colorbar_drawn:
         #
         #     self.cb = plt.colorbar()
