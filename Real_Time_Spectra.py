@@ -4,9 +4,9 @@ from __future__ import division, print_function
 import numpy as np
 # from pandas import DataFrame
 import matplotlib
-# matplotlib.use('GTKAgg')
+matplotlib.use('GTKAgg')
 # matplotlib.use('TkAgg')
-matplotlib.use('Qt4Agg')
+# matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
 
 import gc
@@ -457,7 +457,7 @@ class Real_Time_Spectra(object):
             #
             # plt.figure(2).canvas.restore_region(self.spectrum_background)
             #
-            # print(plt.figure(2).axes)
+            print(plt.figure(2).axes)
             #
             # # plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
             #
