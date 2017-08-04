@@ -442,7 +442,7 @@ class Real_Time_Spectra(object):
             '''
             Store the background to the spectrum plot.
             '''
-            self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(self.spectrum_plot.bbox)
+            self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(self.spectrum_axis.bbox)
             # self.spectrum_background = plt.figure(2).canvas.copy_from_bbox(plt.gca().bbox)
 
             # plt.draw()
