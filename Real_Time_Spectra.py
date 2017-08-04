@@ -161,9 +161,11 @@ class Real_Time_Spectra(object):
         # self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(plt.gca().bbox)
 
         '''
-        Setup the plot for the spectrum graph.
+        Setup the figure window for the spectrum graph.
         '''
-        plt.figure(2), self.spectrum_axis = plt.subplots()
+        plt.figure(2)
+
+        self.spectrum_axis = plt.figure(2).add_subplot(1, 1, 1)
 
         '''
         Change the window geometry (position and size) using the proper scaling
