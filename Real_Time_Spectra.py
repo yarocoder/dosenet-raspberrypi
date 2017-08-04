@@ -456,11 +456,13 @@ class Real_Time_Spectra(object):
 
             print(plt.figure(2).axes)
 
-            # plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
+            plt.figure(2).axes[0].draw_artist(self.spectrum_plot[0])
 
-            plt.gca().draw_artist(self.spectrum_plot[0])
+            # plt.gca().draw_artist(self.spectrum_plot[0])
 
-            plt.figure(2).canvas.blit(plt.gca().bbox)
+            plt.figure(2).canvas.blit(plt.figure(2).axes[0].bbox)
+
+            # plt.figure(2).canvas.blit(plt.gca().bbox)
 
         # '''
         # Update the plot with the new spectrum.
