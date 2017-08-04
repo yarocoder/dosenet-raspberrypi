@@ -459,12 +459,10 @@ class Real_Time_Spectra(object):
         '''
         plt.figure(2)
 
-        # '''
-        # Clear the prior spectrum figure.
-        # '''
-        # plt.clf()
-
-        plt.cla()
+        '''
+        Clear the prior spectrum figure.
+        '''
+        plt.clf()
 
         '''
         Plot the spectrum figure fresh if it hasn't been plotted before.
