@@ -479,7 +479,7 @@ class Real_Time_Spectra(object):
             '''
             Set new plot data.
             '''
-            self.waterfall_plot.set_data(np.array(self.data))
+            self.waterfall_plot.set_array(np.array(self.data))
 
             '''
             Restore the background region of the spectrum plot.
