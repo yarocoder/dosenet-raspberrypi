@@ -504,8 +504,8 @@ class Real_Time_Spectra(object):
         Add a colorbar.
         '''
         # plt.figure(1).colorbar(plt.figure(1))
-        # plt.figure(1).colorbar(self.waterfall_plot)
-        plt.colorbar()
+        plt.figure(1).colorbar(self.waterfall_plot)
+        # plt.colorbar()
 
         '''
         Collect and remove the figure window cache.
