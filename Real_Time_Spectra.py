@@ -448,6 +448,13 @@ class Real_Time_Spectra(object):
             # # plt.tight_layout()
 
             '''
+            Add a colorbar.
+            '''
+            # plt.figure(1).colorbar(plt.figure(1))
+            plt.figure(1).colorbar(self.waterfall_plot)
+            # plt.colorbar()
+
+            '''
             Show the spectrum graph.
             '''
             plt.show(block=False)
@@ -499,13 +506,6 @@ class Real_Time_Spectra(object):
         # Refresh the Qt events used to create the canvas.
         # '''
         # plt.figure(1).canvas.flush_events()
-
-        '''
-        Add a colorbar.
-        '''
-        # plt.figure(1).colorbar(plt.figure(1))
-        plt.figure(1).colorbar(self.waterfall_plot)
-        # plt.colorbar()
 
         '''
         Collect and remove the figure window cache.
