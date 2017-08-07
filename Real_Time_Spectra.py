@@ -426,7 +426,7 @@ class Real_Time_Spectra(object):
             """
             Plots the data for the waterfall plot.
             """
-            [self.waterfall_plot] = self.waterfall_axis.imshow(self.data,
+            self.waterfall_plot = self.waterfall_axis.imshow(self.data,
                                                                interpolation='nearest',
                                                                aspect='auto',
                                                                extent=[1, 4096, 0,
