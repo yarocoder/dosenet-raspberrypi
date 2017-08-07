@@ -167,6 +167,11 @@ class Real_Time_Spectra(object):
         plt.figure(1)
 
         '''
+        Add a subplot to the figure window so we can add artists to it.
+        '''
+        self.waterfall_axis = plt.figure(1).add_subplot(1, 1, 1)
+
+        '''
         Label the axes.
         '''
         plt.xlabel('Bin')
@@ -392,20 +397,6 @@ class Real_Time_Spectra(object):
         '''
         plt.clf()
 
-        """
-        Grabs the data for waterfall plot.
-        """
-        self.make_image()
-
-        """
-        Plots the data for the waterfall plot.
-        """
-        self.waterfall_plot = plt.imshow(self.data,
-                                         interpolation='nearest',
-                                         aspect='auto',
-                                         extent=[1, 4096, 0,
-                                         np.shape(self.data)[0]
-                                         * self.interval])
         # """
         # Updates the colorbar by removing old colorbar.
         # """
@@ -431,14 +422,86 @@ class Real_Time_Spectra(object):
         plt.tight_layout()
 
         '''
-        Update the figure window with the new waterfall plot.
-        '''
-        plt.figure(1).canvas.update()
+        Plot the waterfall figure fresh if it hasn't been plotted before.
 
+        Otherwise, just update the x and y data, restore the background to the
+        plot, redraw the plot contents and fill the plot window.
         '''
-        Refresh the Qt events used to create the canvas.
-        '''
-        plt.figure(1).canvas.flush_events()
+        if self.waterfall_drawn == False:
+
+            """
+            Grabs the data for waterfall plot.
+            """
+            self.make_image()
+
+            """
+            Plots the data for the waterfall plot.
+            """
+            [self.waterfall_plot] = self.waterfall_axis.imshow(self.data,
+                                                               interpolation='nearest',
+                                                               aspect='auto',
+                                                               extent=[1, 4096, 0,
+                                                               np.shape(self.data)[0]
+                                                               * self.interval])
+            # self.waterfall_plot = plt.imshow(self.data,
+            #                                  interpolation='nearest',
+            #                                  aspect='auto',
+            #                                  extent=[1, 4096, 0,
+            #                                  np.shape(self.data)[0]
+            #                                  * self.interval])
+
+            '''
+            Show the spectrum graph.
+            '''
+            plt.show(block=False)
+
+            '''
+            Draw the figure canvas.
+            '''
+            plt.figure(1).canvas.draw()
+
+            '''
+            Store the background to the spectrum plot.
+            '''
+            self.waterfall_background = plt.figure(1).canvas.copy_from_bbox(self.waterfall_axis.bbox)
+
+            '''
+            Ensure the entire plot isn't replotted again.
+            '''
+            self.waterfall_drawn = True
+
+        else:
+
+            '''
+            Set new plot data.
+            '''
+            self.waterfall_plot.set_data(np.array(self.data))
+
+            '''
+            Restore the background region of the spectrum plot.
+            '''
+            plt.figure(1).canvas.restore_region(self.waterfall_background)
+
+            '''
+            Redraw the artist corresponding to the spectrum shape only.
+            '''
+            self.waterfall_axis.draw_artist(self.waterfall_plot)
+
+            '''
+            Copy over the new figure from the old one and only change what has
+            been changed.
+            '''
+            plt.figure(1).canvas.blit(self.waterfall_axis.bbox)
+
+        # '''
+        # Update the figure window with the new waterfall plot.
+        # '''
+        # plt.figure(1).canvas.update()
+        #
+        # '''
+        # Refresh the Qt events used to create the canvas.
+        # '''
+        # plt.figure(1).canvas.flush_events()
 
         '''
         Collect and remove the figure window cache.

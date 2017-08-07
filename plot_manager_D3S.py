@@ -70,9 +70,9 @@ class Manager_D3S(object):
 
         self.running = running
 
-        self.total = None
-        self.lst = None
-        self.create_structures = True
+        # self.total = None
+        # self.lst = None
+        # self.create_structures = True
 
         self.interval = interval
         self.maxspectra = maxspectra
@@ -251,14 +251,14 @@ class Manager_D3S(object):
             while self.running:
                 with kromek.Controller(devs, self.interval) as controller:
                     for reading in controller.read():
-                        if self.create_structures:
-                            self.total = np.array(reading[4])
-                            self.lst = np.array([reading[4]])
-                            self.create_structures = False
-                        else:
-                            self.total += np.array(reading[4])
-                            self.lst = np.concatenate(
-                                (self.lst, [np.array(reading[4])]))
+                        # if self.create_structures:
+                            # self.total = np.array(reading[4])
+                            # self.lst = np.array([reading[4]])
+                            # self.create_structures = False
+                        # else:
+                            # self.total += np.array(reading[4])
+                            # self.lst = np.concatenate(
+                                # (self.lst, [np.array(reading[4])]))
                         serial = reading[0]
                         dev_count = reading[1]
                         if serial not in done_devices:
@@ -334,8 +334,13 @@ class Manager_D3S(object):
         """
         Get spectra from sensor, display text, send to server.
         """
+
+        '''
+        Add the spectra to the queue.
+        '''
+        self.rt_plot.add_data(self.rt_plot.queue, spectra, self.maxspectra)
+
         if self.plot:
-            self.rt_plot.add_data(self.rt_plot.queue, spectra, self.maxspectra)
 
             '''
             Plot the data.
