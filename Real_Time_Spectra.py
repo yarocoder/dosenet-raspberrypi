@@ -462,7 +462,7 @@ class Real_Time_Spectra(object):
             '''
             Draw the figure canvas.
             '''
-            # plt.figure(1).canvas.draw()
+            plt.figure(1).canvas.draw()
 
             '''
             Store the background to the spectrum plot.
