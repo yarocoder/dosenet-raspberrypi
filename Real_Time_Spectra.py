@@ -444,7 +444,7 @@ class Real_Time_Spectra(object):
             Resize the plot so the figure window can fit both it and the axes to
             the plot.
             '''
-            self.waterfall_plot.tight_layout()
+            plt.figure(1).tight_layout()
             # plt.tight_layout()
 
             '''
