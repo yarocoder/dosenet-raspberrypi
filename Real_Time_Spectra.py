@@ -431,7 +431,8 @@ class Real_Time_Spectra(object):
                                                                aspect='auto',
                                                                extent=[1, 4096, 0,
                                                                np.shape(self.data)[0]
-                                                               * self.interval])
+                                                               * self.interval],
+                                                               animated=true)
 
             # self.waterfall_plot = plt.imshow(self.data,
             #                                  interpolation='nearest',
