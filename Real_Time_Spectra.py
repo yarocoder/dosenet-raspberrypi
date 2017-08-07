@@ -411,12 +411,6 @@ class Real_Time_Spectra(object):
         #     self.cb = plt.colorbar()
 
         '''
-        Resize the plot so the figure window can fit both it and the axes to
-        the plot.
-        '''
-        plt.tight_layout()
-
-        '''
         Plot the waterfall figure fresh if it hasn't been plotted before.
 
         Otherwise, just update the x and y data, restore the background to the
@@ -429,6 +423,12 @@ class Real_Time_Spectra(object):
             """
             self.make_image()
 
+            '''
+            Resize the plot so the figure window can fit both it and the axes to
+            the plot.
+            '''
+            plt.tight_layout()
+
             """
             Plots the data for the waterfall plot.
             """
@@ -438,6 +438,7 @@ class Real_Time_Spectra(object):
                                                                extent=[1, 4096, 0,
                                                                np.shape(self.data)[0]
                                                                * self.interval])
+
             # self.waterfall_plot = plt.imshow(self.data,
             #                                  interpolation='nearest',
             #                                  aspect='auto',
