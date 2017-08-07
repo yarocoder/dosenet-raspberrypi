@@ -440,12 +440,12 @@ class Real_Time_Spectra(object):
             #                                  np.shape(self.data)[0]
             #                                  * self.interval])
 
-            '''
-            Resize the plot so the figure window can fit both it and the axes to
-            the plot.
-            '''
-            plt.figure(1).tight_layout()
-            # plt.tight_layout()
+            # '''
+            # Resize the plot so the figure window can fit both it and the axes to
+            # the plot.
+            # '''
+            # plt.figure(1).tight_layout()
+            # # plt.tight_layout()
 
             '''
             Show the spectrum graph.
