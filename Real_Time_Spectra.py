@@ -411,11 +411,6 @@ class Real_Time_Spectra(object):
         #     self.cb = plt.colorbar()
 
         '''
-        Add a colorbar.
-        '''
-        plt.colorbar()
-
-        '''
         Resize the plot so the figure window can fit both it and the axes to
         the plot.
         '''
@@ -502,6 +497,12 @@ class Real_Time_Spectra(object):
         # Refresh the Qt events used to create the canvas.
         # '''
         # plt.figure(1).canvas.flush_events()
+
+        '''
+        Add a colorbar.
+        '''
+        self.waterfall_axis.colorbar()
+        # plt.colorbar()
 
         '''
         Collect and remove the figure window cache.
