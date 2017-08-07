@@ -503,7 +503,7 @@ class Real_Time_Spectra(object):
         '''
         Add a colorbar.
         '''
-        self.waterfall_plot.colorbar()
+        plt.figure(1).colorbar()
         # plt.colorbar()
 
         '''
