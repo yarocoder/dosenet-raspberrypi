@@ -4,7 +4,7 @@ from __future__ import division, print_function
 import numpy as np
 # from pandas import DataFrame
 import matplotlib
-matplotlib.use('GTKAgg')
+# matplotlib.use('GTKAgg')
 # matplotlib.use('TkAgg')
 # matplotlib.use('Qt4Agg')
 import matplotlib.pyplot as plt
@@ -463,8 +463,7 @@ class Real_Time_Spectra(object):
             '''
             Draw the figure canvas.
             '''
-            self.waterfall_plot.canvas.draw()
-            # plt.figure(1).canvas.draw()
+            plt.figure(1).canvas.draw()
 
             '''
             Store the background to the spectrum plot.
