@@ -522,7 +522,7 @@ class Real_Time_Spectra(object):
         Update the waterfall plot.
         '''
 
-        plt.clf()
+        # plt.clf()
 
         """
         Grab the data for the waterfall plot.
@@ -540,24 +540,31 @@ class Real_Time_Spectra(object):
                                                          * self.interval],
                                                          animated=True)
 
-        # """
-        # Updates the colorbar by removing old colorbar.
-        # """
-        # if self.first_colorbar:
-        '''
-        Create the first colorbar and store it.
-        '''
-        self.cb = plt.colorbar()
+        """
+        Update the colorbar by removing old colorbar if it has been created.
+        """
+        if self.first_colorbar:
+            '''
+            Create the first colorbar and store it.
+            '''
+            self.cb = plt.colorbar()
 
-        #     '''
-        #     Set the appropriate variables so that
-        #     '''
-        #     self.first_colorbar = False
-        #
-        # if not self.first_colorbar:
-        #
-        #     self.cb.remove()
-        #     self.cb = plt.colorbar()
+            '''
+            Set the appropriate variable so that the script will remove and make
+            a new colorbar the next time the waterfall plot is updated.
+            '''
+            self.first_colorbar = False
+
+        if not self.first_colorbar:
+            '''
+            Remove the old colorbar.
+            '''
+            self.cb.remove()
+
+            '''
+            Plot a new colorbar.
+            '''
+            self.cb = plt.colorbar()
 
         # '''
         # Remove the old colorbar.
