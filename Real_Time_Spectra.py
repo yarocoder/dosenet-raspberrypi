@@ -402,10 +402,10 @@ class Real_Time_Spectra(object):
         # '''
         # plt.clf()
 
-        """
-        Grabs the data for waterfall plot.
-        """
-        self.make_image()
+        # """
+        # Grabs the data for waterfall plot.
+        # """
+        # self.make_image()
 
         """
         Plots the data for the waterfall plot.
