@@ -527,7 +527,11 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
-        [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
+        if avg_data = None:
+            [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, drawstyle='steps-mid')
+
+        elif:
+            [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
         # self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
         '''
