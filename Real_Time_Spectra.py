@@ -484,7 +484,7 @@ class Real_Time_Spectra(object):
             self.waterfall_animation = FuncAnimation(plt.figure(1),
                                                      self.update_waterfall,
                                                     #  init_func=self.plot_waterfall,
-                                                     interval=self.interval*1000,
+                                                     interval=100,
                                                      blit=True)
 
             '''
