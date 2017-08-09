@@ -534,6 +534,11 @@ class Real_Time_Spectra(object):
                                                          * self.interval],
                                                          animated=True)
 
+        '''
+        Add a colorbar.
+        '''
+        plt.figure(1).colorbar(self.waterfall_plot)
+
         # '''
         # Set new plot data.
         # '''
