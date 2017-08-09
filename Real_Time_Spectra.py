@@ -214,6 +214,11 @@ class Real_Time_Spectra(object):
         plt.figure(2)
 
         '''
+        Plot the spectrum figure window.
+        '''
+        self.plot_spectrum()
+
+        '''
         Show the blank plot without blocking further changes to the figure
         window. Allows for fast updating of the figure later.
         '''
