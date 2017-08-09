@@ -575,6 +575,16 @@ class Real_Time_Spectra(object):
         self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
 
         '''
+        Show the spectrum graph.
+        '''
+        plt.show(block=False)
+
+        '''
+        Draw the figure canvas.
+        '''
+        plt.figure(2).canvas.draw()
+
+        '''
         Collect and remove the figure window cache.
         '''
         gc.collect()
