@@ -84,7 +84,11 @@ class Real_Time_Spectra(object):
         '''
         self.first_waterfall = True
 
-        # self.first_colorbar = True
+        '''
+        Initialize the variable to check if the first colorbar has been drawn
+        on the waterfall plot.
+        '''
+        self.first_colorbar = True
 
         '''
         Initialize the variable to check if the spectrum has been drawn.
