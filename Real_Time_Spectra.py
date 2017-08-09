@@ -411,7 +411,7 @@ class Real_Time_Spectra(object):
         '''
         Add a colorbar.
         '''
-        plt.figure(1).colorbar(self.waterfall_plot)
+        self.cb = plt.figure(1).colorbar(self.waterfall_plot)
         # plt.figure(1).colorbar(plt.figure(1))
         # plt.colorbar()
 
@@ -535,9 +535,14 @@ class Real_Time_Spectra(object):
                                                          animated=True)
 
         '''
+        Remove the old colorbar.
+        '''
+        self.cb.remove()
+
+        '''
         Add a colorbar.
         '''
-        plt.figure(1).colorbar(self.waterfall_plot)
+        self.cb = plt.figure(1).colorbar(self.waterfall_plot)
 
         # '''
         # Set new plot data.
