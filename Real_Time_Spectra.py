@@ -523,10 +523,21 @@ class Real_Time_Spectra(object):
         """
         self.make_image()
 
-        '''
-        Set new plot data.
-        '''
-        self.waterfall_plot.set_array(np.array(self.data))
+        """
+        Plots the data for the waterfall plot.
+        """
+        self.waterfall_plot = self.waterfall_axis.imshow(self.data,
+                                                         interpolation='nearest',
+                                                         aspect='auto',
+                                                         extent=[1, 4096, 0,
+                                                         np.shape(self.data)[0]
+                                                         * self.interval],
+                                                         animated=True)
+
+        # '''
+        # Set new plot data.
+        # '''
+        # self.waterfall_plot.set_array(np.array(self.data))
 
         # '''
         # Stop the waterfall animation so the plot manager script can obtain the
