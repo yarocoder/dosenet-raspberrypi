@@ -353,7 +353,7 @@ class Real_Time_Spectra(object):
 
         Default: 0.1 seconds.
         '''
-        plt.pause(0.001)
+        plt.pause(0.01)
 
         '''
         Stop the animation again until the plot can be updated with new data.
