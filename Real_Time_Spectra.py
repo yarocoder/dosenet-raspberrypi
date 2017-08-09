@@ -484,7 +484,7 @@ class Real_Time_Spectra(object):
             self.waterfall_animation = FuncAnimation(plt.figure(1),
                                                      self.update_waterfall,
                                                     #  init_func=self.plot_waterfall,
-                                                     interval=100,
+                                                     interval=self.interval,
                                                      blit=True)
 
             '''
@@ -497,7 +497,7 @@ class Real_Time_Spectra(object):
             Stop the waterfall animation so we can update the data later and control
             the contents of each frame.
             '''
-            self.stop_waterfall_anim()
+            # self.stop_waterfall_anim()
             # self.waterfall_animation.event_source.stop()
 
             '''
@@ -511,7 +511,7 @@ class Real_Time_Spectra(object):
             Create the next frame in the animation with new data and then stop
             the animation until we have more data.
             '''
-            self.create_waterfall_frame()
+            # self.create_waterfall_frame()
 
     def update_waterfall(self, *args):
         '''
