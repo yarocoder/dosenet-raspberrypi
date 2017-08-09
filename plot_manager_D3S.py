@@ -311,14 +311,17 @@ class Manager_D3S(object):
                 self.takedown()
 
     def plot_waterfall(self):
-        """Wrapper around waterfall plotter in Real_Time_Spectra class"""
-
-        self.rt_plot.plot_waterfall()
+        """
+        Wrapper around waterfall plotter in Real_Time_Spectra class
+        """
+        self.rt_plot.
+        # self.rt_plot.update_waterfall()
 
     def plot_spectrum(self):
-        """Wrapper around spectrum plotter in Real_Time_Spectra class"""
-
-        self.rt_plot.plot_sum()
+        """
+        Wrapper around spectrum plotter in Real_Time_Spectra class
+        """
+        self.rt_plot.update_spectrum()
 
     def plot_fitter(self):
         """
