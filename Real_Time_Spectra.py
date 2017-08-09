@@ -170,6 +170,8 @@ class Real_Time_Spectra(object):
         '''
         plt.figure(1)
 
+        self.plot_waterfall()
+
         '''
         Create the waterfall animation.
 
@@ -182,7 +184,7 @@ class Real_Time_Spectra(object):
         '''
         self.waterfall_animation = FuncAnimation(plt.figure(1),
                                                  self.update_waterfall,
-                                                 init_func=self.plot_waterfall,
+                                                #  init_func=self.plot_waterfall,
                                                  interval=1, blit=True)
 
         '''
