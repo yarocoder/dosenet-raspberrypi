@@ -362,6 +362,12 @@ class Real_Time_Spectra(object):
         '''
         self.waterfall_animation.event_source.start()
 
+    def stop_waterfall_anim(self):
+        '''
+        Pause the waterfall animation.
+        '''
+        self.waterfall_animation.event_source.stop()
+
     def plot_waterfall(self):
         '''
         Creates first waterfall plot.
@@ -472,11 +478,11 @@ class Real_Time_Spectra(object):
         '''
         self.waterfall_plot.set_array(np.array(self.data))
 
-        '''
-        Stop the waterfall animation so the plot manager script can obtain the
-        data necessary to plot the next frame.
-        '''
-        self.waterfall_animation.event_source.stop()
+        # '''
+        # Stop the waterfall animation so the plot manager script can obtain the
+        # data necessary to plot the next frame.
+        # '''
+        # self.waterfall_animation.event_source.stop()
 
         '''
         Collect and remove the figure window cache.
@@ -545,10 +551,10 @@ class Real_Time_Spectra(object):
         '''
         plt.show(block=False)
 
-        '''
-        Draw the figure canvas.
-        '''
-        plt.figure(2).canvas.draw()
+        # '''
+        # Draw the figure canvas.
+        # '''
+        # plt.figure(2).canvas.draw()
 
     def update_spectrum(self):
         """
@@ -579,10 +585,10 @@ class Real_Time_Spectra(object):
         '''
         plt.show(block=False)
 
-        '''
-        Draw the figure canvas.
-        '''
-        plt.figure(2).canvas.draw()
+        # '''
+        # Draw the figure canvas.
+        # '''
+        # plt.figure(2).canvas.draw()
 
         '''
         Collect and remove the figure window cache.
