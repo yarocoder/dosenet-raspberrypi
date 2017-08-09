@@ -80,22 +80,16 @@ class Real_Time_Spectra(object):
         self.resolution = resolution
 
         '''
-        Initialize the variable used to check if the first waterfall needs to
-        be drawn.
+        Initialize the variable to check if the first waterfall has been drawn.
         '''
         self.first_waterfall = True
 
         # self.first_colorbar = True
 
         '''
-        Initialize the variable to check if the waterfall has been drawn.
-        '''
-        self.waterfall_drawn = False
-
-        '''
         Initialize the variable to check if the spectrum has been drawn.
         '''
-        self.spectrum_drawn = False
+        self.first_spectrum = True
 
         '''
         Start up the plotting windows.
@@ -170,34 +164,7 @@ class Real_Time_Spectra(object):
         '''
         plt.figure(1)
 
-        self.plot_waterfall()
-
-        '''
-        Create the waterfall animation.
-
-        Options set: - Waterfall figure window as animation window
-                     - self.update_waterfall as the updating function
-                     - self.plot_waterfall as the initialization function
-                     - 1 ms interval between frames
-                     - Blitting is on to copy over pixels from the last frame
-                       that haven't changed in order to optimize the animation
-        '''
-        self.waterfall_animation = FuncAnimation(plt.figure(1),
-                                                 self.update_waterfall,
-                                                #  init_func=self.plot_waterfall,
-                                                 interval=1, blit=True)
-
-        '''
-        Show the blank plot without blocking further changes to the figure
-        window. Allows for fast updating of the figure later.
-        '''
-        plt.show(block=False)
-
-        '''
-        Stop the waterfall animation so we can update the data later and control
-        the contents of each frame.
-        '''
-        self.waterfall_animation.event_source.stop()
+        # self.plot_waterfall()
 
         # '''
         # Draw the blank canvas figure for the spectrum plot and store it as the
@@ -370,6 +337,29 @@ class Real_Time_Spectra(object):
         '''
         self.waterfall_animation.event_source.stop()
 
+    def create_waterfall_frame(self):
+        '''
+        Create the next frame in the animation with fresh data.
+        '''
+
+        '''
+        Start the animation again, new data being gathered and plotted for the
+        new frame in the update method of the animation manager.
+        '''
+        self.play_waterfall_anim()
+
+        '''
+        Wait for the waterfall plot to be updated.
+
+        Default: 0.1 seconds.
+        '''
+        plt.pause(0.1)
+
+        '''
+        Stop the animation again until the plot can be updated with new data.
+        '''
+        self.stop_waterfall_anim()
+
     def plot_waterfall(self):
         '''
         Creates first waterfall plot.
@@ -402,10 +392,10 @@ class Real_Time_Spectra(object):
         # '''
         # plt.clf()
 
-        # """
-        # Grabs the data for waterfall plot.
-        # """
-        # self.make_image()
+        """
+        Grabs the data for waterfall plot.
+        """
+        self.make_image()
 
         """
         Plots the data for the waterfall plot.
@@ -464,6 +454,63 @@ class Real_Time_Spectra(object):
         function instance of FuncAnimation.
         '''
         return [self.waterfall_plot]
+
+    def progress_waterfall_anim(self):
+        '''
+        Progress the waterfall animation.
+        '''
+
+        '''
+        Create the waterfall plot and animation for it if it hasn't been done so
+        before during the execution of a real time plotting session. Otherwise,
+        update the animation with the new plot data.
+        '''
+        if self.first_waterfall:
+            '''
+            Create the first waterfall plot.
+            '''
+            self.plot_waterfall()
+
+            '''
+            Create the waterfall animation.
+
+            Options set: - Waterfall figure window as animation window
+                         - self.update_waterfall as the updating function
+                         - self.plot_waterfall as the initialization function
+                         - 1 ms interval between frames
+                         - Blitting is on to copy over pixels from the last frame
+                           that haven't changed in order to optimize the animation
+            '''
+            self.waterfall_animation = FuncAnimation(plt.figure(1),
+                                                     self.update_waterfall,
+                                                    #  init_func=self.plot_waterfall,
+                                                     interval=1, blit=True)
+
+            '''
+            Show the blank plot without blocking further changes to the figure
+            window. Allows for fast updating of the figure later.
+            '''
+            plt.show(block=False)
+
+            '''
+            Stop the waterfall animation so we can update the data later and control
+            the contents of each frame.
+            '''
+            self.stop_waterfall_anim()
+            # self.waterfall_animation.event_source.stop()
+
+            '''
+            Make sure we don't create the waterfall plot and animation all over
+            again.
+            '''
+            self.first_waterfall = False
+
+        else:
+            '''
+            Create the next frame in the animation with new data and then stop
+            the animation until we have more data.
+            '''
+            self.create_waterfall_frame()
 
     def update_waterfall(self, *args):
         '''
@@ -604,7 +651,7 @@ class Real_Time_Spectra(object):
 # Otherwise, just update the x and y data, restore the background to the
 # plot, redraw the plot contents and fill the plot window.
 # '''
-# if self.waterfall_drawn == False:
+# if self.first_waterfall == False:
 #
 #     """
 #     Grabs the data for waterfall plot.
@@ -661,7 +708,7 @@ class Real_Time_Spectra(object):
 #     '''
 #     Ensure the entire plot isn't replotted again.
 #     '''
-#     self.waterfall_drawn = True
+#     self.first_waterfall = True
 #
 # else:
 #
@@ -702,7 +749,7 @@ class Real_Time_Spectra(object):
 # Otherwise, just update the x and y data, restore the background to the
 # plot, redraw the plot contents and fill the plot window.
 # '''
-# if self.spectrum_drawn == False:
+# if self.first_spectrum == False:
 #
 #     '''
 #     Plot the spectrum graph.
@@ -727,7 +774,7 @@ class Real_Time_Spectra(object):
 #     '''
 #     Ensure the entire plot isn't replotted again.
 #     '''
-#     self.spectrum_drawn = True
+#     self.first_spectrum = True
 #
 # else:
 #
