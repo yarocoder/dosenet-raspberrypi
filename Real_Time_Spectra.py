@@ -216,7 +216,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum figure window.
         '''
-        self.plot_spectrum() 
+        self.plot_spectrum(avg_data, sum_data)
 
         '''
         Show the blank plot without blocking further changes to the figure
