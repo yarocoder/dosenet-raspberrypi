@@ -530,7 +530,7 @@ class Real_Time_Spectra(object):
         if avg_data:
             [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, drawstyle='steps-mid')
 
-        elif:
+        else:
             [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
         # self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
