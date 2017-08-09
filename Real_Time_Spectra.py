@@ -484,7 +484,8 @@ class Real_Time_Spectra(object):
             self.waterfall_animation = FuncAnimation(plt.figure(1),
                                                      self.update_waterfall,
                                                     #  init_func=self.plot_waterfall,
-                                                     interval=self.interval, blit=True)
+                                                     interval=self.interval*1000,
+                                                     blit=True)
 
             '''
             Show the blank plot without blocking further changes to the figure
