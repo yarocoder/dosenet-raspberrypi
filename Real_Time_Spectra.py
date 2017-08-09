@@ -10,8 +10,8 @@ import matplotlib as mpl
 mpl.use('GTKAgg')
 # mpl.use('TkAgg')
 # mpl.use('Qt4Agg')
-import mpl.pyplot as plt
-from mpl.animation import FuncAnimation
+from mpl import pyplot as plt
+from matplotlib.animation import FuncAnimation
 
 import gc
 
