@@ -527,7 +527,7 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
-        if avg_data:
+        if avg_data is None:
             [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, drawstyle='steps-mid')
 
         else:
