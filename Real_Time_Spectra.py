@@ -213,15 +213,15 @@ class Real_Time_Spectra(object):
         '''
         plt.figure(2)
 
-        '''
-        Get the running average
-        '''
-        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
+        # '''
+        # Get the running average
+        # '''
+        # avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
         Plot the spectrum figure window.
         '''
-        self.plot_spectrum(avg_data, sum_data)
+        self.plot_spectrum()
 
         '''
         Show the blank plot without blocking further changes to the figure
@@ -489,7 +489,7 @@ class Real_Time_Spectra(object):
         '''
         return [self.waterfall_plot]
 
-    def plot_spectrum(self, avg_data, sum_data):
+    def plot_spectrum(self, avg_data=None, sum_data=None):
         """Creates first spectrum plot."""
 
         '''
