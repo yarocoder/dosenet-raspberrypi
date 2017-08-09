@@ -6,8 +6,8 @@ from __future__ import division, print_function
 import numpy as np
 # from pandas import DataFrame
 
-import matplotlib as mpl
-mpl.use('GTKAgg')
+import matplotlib
+matplotlib.use('GTKAgg')
 # mpl.use('TkAgg')
 # mpl.use('Qt4Agg')
 import matplotlib.pyplot as plt
