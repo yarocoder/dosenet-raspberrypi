@@ -214,6 +214,11 @@ class Real_Time_Spectra(object):
         plt.figure(2)
 
         '''
+        Get the running average
+        '''
+        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
+
+        '''
         Plot the spectrum figure window.
         '''
         self.plot_spectrum(avg_data, sum_data)
