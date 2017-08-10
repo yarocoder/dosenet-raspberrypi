@@ -406,7 +406,7 @@ class Real_Time_Spectra(object):
             Stop the waterfall animation so we can update the data later and control
             the contents of each frame.
             '''
-            # self.stop_waterfall_anim()
+            self.stop_waterfall_anim()
             # self.waterfall_animation.event_source.stop()
 
             '''
@@ -420,7 +420,7 @@ class Real_Time_Spectra(object):
             Create the next frame in the animation with new data and then stop
             the animation until we have more data.
             '''
-            # self.create_waterfall_frame()
+            self.create_waterfall_frame()
 
     def plot_waterfall(self):
         '''
@@ -675,7 +675,7 @@ class Real_Time_Spectra(object):
             Stop the waterfall animation so we can update the data later and control
             the contents of each frame.
             '''
-            # self.stop_spectrum_anim()
+            self.stop_spectrum_anim()
             # self.waterfall_animation.event_source.stop()
 
             '''
@@ -689,7 +689,7 @@ class Real_Time_Spectra(object):
             Create the next frame in the animation with new data and then stop
             the animation until we have more data.
             '''
-            # self.create_spectrum_frame()
+            self.create_spectrum_frame()
 
     def plot_spectrum(self):
         """Creates first spectrum plot."""
