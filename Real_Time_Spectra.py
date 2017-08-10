@@ -547,7 +547,7 @@ class Real_Time_Spectra(object):
             '''
             Create the first colorbar and store it.
             '''
-            self.cb = plt.figure(1).colorbar()
+            self.cb = plt.figure(1).colorbar(self.waterfall_plot)
 
             '''
             Set the appropriate variable so that the script will remove and make
@@ -564,7 +564,7 @@ class Real_Time_Spectra(object):
             '''
             Plot a new colorbar.
             '''
-            self.cb = plt.figure(1).colorbar()
+            self.cb = plt.figure(1).colorbar(self.waterfall_plot)
 
         # '''
         # Remove the old colorbar.
