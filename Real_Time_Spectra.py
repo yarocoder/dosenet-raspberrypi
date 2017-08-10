@@ -666,7 +666,7 @@ class Real_Time_Spectra(object):
             self.spectrum_animation = FuncAnimation(plt.figure(2),
                                                      self.update_spectrum,
                                                     #  init_func=self.plot_spectrum,
-                                                     interval=1,
+                                                     interval=100,
                                                      blit=True)
 
             '''
