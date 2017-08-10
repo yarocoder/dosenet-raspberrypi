@@ -163,10 +163,10 @@ class Real_Time_Spectra(object):
         '''
         plt.ion()
 
-        # '''
-        # Setup the plot for the waterfall graph.
-        # '''
-        # plt.figure(1)
+        '''
+        Setup the plot for the waterfall graph.
+        '''
+        plt.figure(1)
 
         # self.plot_waterfall()
 
@@ -181,10 +181,10 @@ class Real_Time_Spectra(object):
         #                                              'ncols': 1,
         #                                              'height_ratios': [4, 1]})
 
-        # '''
-        # Setup the figure window for the spectrum graph.
-        # '''
-        # plt.figure(2)
+        '''
+        Setup the figure window for the spectrum graph.
+        '''
+        plt.figure(2)
 
         # '''
         # Get the running average
