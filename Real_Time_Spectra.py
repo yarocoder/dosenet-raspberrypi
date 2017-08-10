@@ -359,6 +359,8 @@ class Real_Time_Spectra(object):
         # '''
         # plt.pause(0.01)
 
+        plt.show(block=False)
+
         '''
         Stop the animation again until the plot can be updated with new data.
         '''
@@ -627,6 +629,8 @@ class Real_Time_Spectra(object):
         # Default: 0.01 seconds.
         # '''
         # plt.pause(0.01)
+
+        plt.show(block=False)
 
         '''
         Stop the animation again until the plot can be updated with new data.
