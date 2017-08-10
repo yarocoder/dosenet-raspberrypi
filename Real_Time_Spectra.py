@@ -352,14 +352,14 @@ class Real_Time_Spectra(object):
         '''
         self.play_waterfall_anim()
 
-        # '''
-        # Wait for the waterfall plot to be updated.
-        #
-        # Default: 0.01 seconds.
-        # '''
-        # plt.pause(0.01)
+        '''
+        Wait for the waterfall plot to be updated.
 
-        plt.show(block=False)
+        Default: 0.01 seconds.
+        '''
+        plt.pause(0.5)
+
+        # plt.show(block=False)
 
         '''
         Stop the animation again until the plot can be updated with new data.
@@ -623,14 +623,14 @@ class Real_Time_Spectra(object):
         '''
         self.play_spectrum_anim()
 
-        # '''
-        # Wait for the spectrum plot to be updated.
-        #
-        # Default: 0.01 seconds.
-        # '''
-        # plt.pause(0.01)
+        '''
+        Wait for the spectrum plot to be updated.
 
-        plt.show(block=False)
+        Default: 0.01 seconds.
+        '''
+        plt.pause(0.5)
+
+        # plt.show(block=False)
 
         '''
         Stop the animation again until the plot can be updated with new data.
