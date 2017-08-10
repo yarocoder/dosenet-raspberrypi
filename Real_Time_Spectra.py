@@ -163,10 +163,10 @@ class Real_Time_Spectra(object):
         '''
         plt.ion()
 
-        '''
-        Setup the plot for the waterfall graph.
-        '''
-        plt.figure(1)
+        # '''
+        # Setup the plot for the waterfall graph.
+        # '''
+        # plt.figure(1)
 
         # self.plot_waterfall()
 
@@ -181,26 +181,26 @@ class Real_Time_Spectra(object):
         #                                              'ncols': 1,
         #                                              'height_ratios': [4, 1]})
 
-        '''
-        Setup the figure window for the spectrum graph.
-        '''
-        plt.figure(2)
+        # '''
+        # Setup the figure window for the spectrum graph.
+        # '''
+        # plt.figure(2)
 
         # '''
         # Get the running average
         # '''
         # avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
-        '''
-        Plot the spectrum figure window.
-        '''
-        self.plot_spectrum()
+        # '''
+        # Plot the spectrum figure window.
+        # '''
+        # self.plot_spectrum()
 
-        '''
-        Show the blank plot without blocking further changes to the figure
-        window. Allows for fast updating of the figure later.
-        '''
-        plt.show(block=False)
+        # '''
+        # Show the blank plot without blocking further changes to the figure
+        # window. Allows for fast updating of the figure later.
+        # '''
+        # plt.show(block=False)
 
     def add_data(self, queue, spectra, maxspectra):
         """
@@ -355,7 +355,7 @@ class Real_Time_Spectra(object):
         '''
         Wait for the waterfall plot to be updated.
 
-        Default: 0.1 seconds.
+        Default: 0.01 seconds.
         '''
         plt.pause(0.01)
 
@@ -364,104 +364,9 @@ class Real_Time_Spectra(object):
         '''
         self.stop_waterfall_anim()
 
-    def plot_waterfall(self):
-        '''
-        Creates first waterfall plot.
-        '''
-
-        '''
-        Switch to the waterfall figure window.
-        '''
-        plt.figure(1)
-
-        '''
-        Add a subplot to the figure window so we can add artists to it.
-        '''
-        self.waterfall_axis = plt.figure(1).add_subplot(1, 1, 1)
-
-        '''
-        Label the axes.
-        '''
-        plt.xlabel('Bin')
-        plt.ylabel('Time (s)')
-
-        '''
-        Change the window geometry (position and size) using the proper scaling
-        factors.
-        '''
-        self.setup_window_geo(0.08, 0.32, 0.36, 0.36)
-
-        # '''
-        # Clear the prior waterfall plot before making a new plot.
-        # '''
-        # plt.clf()
-
-        """
-        Grabs the data for waterfall plot.
-        """
-        self.make_image()
-
-        """
-        Plots the data for the waterfall plot.
-        """
-        self.waterfall_plot = self.waterfall_axis.imshow(self.data,
-                                                         interpolation='nearest',
-                                                         aspect='auto',
-                                                         extent=[1, 4096, 0,
-                                                         np.shape(self.data)[0]
-                                                         * self.interval],
-                                                         animated=True)
-
-        '''
-        Add a colorbar.
-        '''
-        self.cb = plt.figure(1).colorbar(self.waterfall_plot)
-        # plt.figure(1).colorbar(plt.figure(1))
-        # plt.colorbar()
-
-        '''
-        Resize the plot so the figure window can fit both it and the axes to
-        the plot.
-        '''
-        plt.figure(1).tight_layout()
-
-        # """
-        # Updates the colorbar by removing old colorbar.
-        # """
-        # if self.first_colorbar:
-        #
-        #     self.cb = plt.colorbar()
-        #     self.first_colorbar = False
-        #
-        # if not self.first_colorbar:
-        #
-        #     self.cb.remove()
-        #     self.cb = plt.colorbar()
-
-        # '''
-        # Show the spectrum graph.
-        # '''
-        # plt.show(block=False)
-        #
-        # '''
-        # Draw the figure canvas.
-        # '''
-        # plt.figure(1).canvas.draw()
-
-        # '''
-        # Show the animation.
-        # '''
-        # plt.show()
-
-        '''
-        Return the waterfall plot in an iterable form to the animation manager
-        function instance of FuncAnimation.
-        '''
-        return [self.waterfall_plot]
-
     def progress_waterfall_anim(self):
         '''
-        Progress the waterfall animation.
+        Create and progress the waterfall animation.
         '''
 
         '''
@@ -517,6 +422,101 @@ class Real_Time_Spectra(object):
             '''
             self.create_waterfall_frame()
 
+    def plot_waterfall(self):
+        '''
+        Creates first waterfall plot.
+        '''
+
+        '''
+        Switch to the waterfall figure window.
+        '''
+        plt.figure(1)
+
+        '''
+        Add a subplot to the figure window so we can add artists to it.
+        '''
+        self.waterfall_axis = plt.figure(1).add_subplot(1, 1, 1)
+
+        '''
+        Label the axes.
+        '''
+        plt.xlabel('Bin')
+        plt.ylabel('Time (s)')
+
+        '''
+        Change the window geometry (position and size) using the proper scaling
+        factors.
+        '''
+        self.setup_window_geo(0.08, 0.32, 0.36, 0.36)
+
+        # '''
+        # Clear the prior waterfall plot before making a new plot.
+        # '''
+        # plt.clf()
+
+        """
+        Grabs the data for the waterfall plot.
+        """
+        self.make_image()
+
+        """
+        Plots the data for the waterfall plot.
+        """
+        self.waterfall_plot = self.waterfall_axis.imshow(self.data,
+                                                         interpolation='nearest',
+                                                         aspect='auto',
+                                                         extent=[1, 4096, 0,
+                                                         np.shape(self.data)[0]
+                                                         * self.interval],
+                                                         animated=True)
+
+        '''
+        Add a colorbar.
+        '''
+        self.cb = plt.figure(1).colorbar(self.waterfall_plot)
+        # plt.figure(1).colorbar(plt.figure(1))
+        # plt.colorbar()
+
+        '''
+        Resize the plot so the figure window can fit both it and the axes to
+        the plot.
+        '''
+        plt.figure(1).tight_layout()
+
+        # """
+        # Updates the colorbar by removing old colorbar.
+        # """
+        # if self.first_colorbar:
+        #
+        #     self.cb = plt.colorbar()
+        #     self.first_colorbar = False
+        #
+        # if not self.first_colorbar:
+        #
+        #     self.cb.remove()
+        #     self.cb = plt.colorbar()
+
+        # '''
+        # Show the spectrum graph.
+        # '''
+        # plt.show(block=False)
+        #
+        # '''
+        # Draw the figure canvas.
+        # '''
+        # plt.figure(1).canvas.draw()
+
+        # '''
+        # Show the animation.
+        # '''
+        # plt.show()
+
+        # '''
+        # Return the waterfall plot in an iterable form to the animation manager
+        # function instance of FuncAnimation.
+        # '''
+        # return [self.waterfall_plot]
+
     def update_waterfall(self, *args):
         '''
         Update the waterfall plot.
@@ -547,7 +547,7 @@ class Real_Time_Spectra(object):
             '''
             Create the first colorbar and store it.
             '''
-            self.cb = plt.colorbar()
+            self.cb = plt.figure(1).colorbar()
 
             '''
             Set the appropriate variable so that the script will remove and make
@@ -564,7 +564,7 @@ class Real_Time_Spectra(object):
             '''
             Plot a new colorbar.
             '''
-            self.cb = plt.colorbar()
+            self.cb = plt.figure(1).colorbar()
 
         # '''
         # Remove the old colorbar.
@@ -598,8 +598,106 @@ class Real_Time_Spectra(object):
         '''
         return [self.waterfall_plot]
 
-    def plot_spectrum(self, avg_data=None, sum_data=None):
+    def play_spectrum_anim(self):
+        '''
+        Unpause the spectrum animation.
+        '''
+        self.spectrum_animation.event_source.start()
+
+    def stop_spectrum_anim(self):
+        '''
+        Pause the spectrum animation.
+        '''
+        self.spectrum_animation.event_source.stop()
+
+    def create_spectrum_frame(self):
+        '''
+        Create the next frame in the animation with fresh data.
+        '''
+
+        '''
+        Start the animation again, new data being gathered and plotted for the
+        new frame in the update method of the animation manager.
+        '''
+        self.play_spectrum_anim()
+
+        '''
+        Wait for the spectrum plot to be updated.
+
+        Default: 0.01 seconds.
+        '''
+        plt.pause(0.01)
+
+        '''
+        Stop the animation again until the plot can be updated with new data.
+        '''
+        self.stop_spectrum_anim()
+
+    def progress_spectrum_anim(self):
+        '''
+        Create and progress the spectrum animation.
+        '''
+
+        '''
+        Create the spectrum plot and animation for it if it hasn't been done so
+        before during the execution of a real time plotting session. Otherwise,
+        update the animation with the new plot data.
+        '''
+        if self.first_spectrum:
+            '''
+            Create the first spectrum plot.
+            '''
+            self.plot_spectrum()
+
+            '''
+            Create the spectrum animation.
+
+            Options set: - spectrum figure window as animation window
+                         - self.update_spectrum as the updating function
+                         - self.plot_spectrum as the initialization function
+                         - 1 ms interval between frames
+                         - Blitting is on to copy over pixels from the last frame
+                           that haven't changed in order to optimize the animation
+            '''
+            self.spectrum_animation = FuncAnimation(plt.figure(2),
+                                                     self.update_spectrum,
+                                                    #  init_func=self.plot_spectrum,
+                                                     interval=1,
+                                                     blit=True)
+
+            '''
+            Show the blank plot without blocking further changes to the figure
+            window. Allows for fast updating of the figure later.
+            '''
+            plt.show(block=False)
+
+            '''
+            Stop the waterfall animation so we can update the data later and control
+            the contents of each frame.
+            '''
+            self.stop_spectrum_anim()
+            # self.waterfall_animation.event_source.stop()
+
+            '''
+            Make sure we don't create the spectrum plot and animation all over
+            again.
+            '''
+            self.first_spectrum = False
+
+        else:
+            '''
+            Create the next frame in the animation with new data and then stop
+            the animation until we have more data.
+            '''
+            self.create_spectrum_frame()
+
+    def plot_spectrum(self):
         """Creates first spectrum plot."""
+
+        '''
+        Get the running average and sum spectrum data.
+        '''
+        avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
         '''
         Switch to working on the spectrum figure window.
@@ -636,11 +734,11 @@ class Real_Time_Spectra(object):
         '''
         Plot the spectrum plot.
         '''
-        if avg_data is None:
-            [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, drawstyle='steps-mid')
-
-        else:
-            [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
+        # if avg_data is None:
+        #     [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, drawstyle='steps-mid')
+        #
+        # else:
+        [self.spectrum_plot] = self.spectrum_axis.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
         # self.spectrum_plot = plt.plot(self.spectrum_bins, avg_data, drawstyle='steps-mid')
 
         '''
@@ -649,44 +747,45 @@ class Real_Time_Spectra(object):
         '''
         plt.tight_layout()
 
-        '''
-        Show the spectrum graph.
-        '''
-        plt.show(block=False)
+        # '''
+        # Show the spectrum graph.
+        # '''
+        # plt.show(block=False)
 
         # '''
         # Draw the figure canvas.
         # '''
         # plt.figure(2).canvas.draw()
 
-    def update_spectrum(self):
+    def update_spectrum(self, *args):
         """
         Plot the sum (spectrum) figure.
         """
+
         '''
-        Get the running average
+        Get the running average and sum spectrum data.
         '''
         avg_data, sum_data = self.run_avg_data(self.queue, self.maxspectra)
 
-        '''
-        Point to the figure window for the spectrum plot.
-        '''
-        plt.figure(2)
+        # '''
+        # Point to the figure window for the spectrum plot.
+        # '''
+        # plt.figure(2)
 
-        '''
-        Clear the prior spectrum figure.
-        '''
-        plt.clf()
+        # '''
+        # Clear the prior spectrum figure.
+        # '''
+        # plt.clf()
 
         '''
         Set new plot data.
         '''
         self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
 
-        '''
-        Show the spectrum graph.
-        '''
-        plt.show(block=False)
+        # '''
+        # Show the spectrum graph.
+        # '''
+        # plt.show(block=False)
 
         # '''
         # Draw the figure canvas.
@@ -697,6 +796,12 @@ class Real_Time_Spectra(object):
         Collect and remove the figure window cache.
         '''
         gc.collect()
+
+        '''
+        Return the spectrum plot in an iterable form to the animation manager
+        function instance of FuncAnimation.
+        '''
+        return [self.spectrum_plot]
 
 
 # '''

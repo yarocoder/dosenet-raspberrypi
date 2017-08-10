@@ -324,7 +324,8 @@ class Manager_D3S(object):
         """
         Wrapper around spectrum plotter in Real_Time_Spectra class
         """
-        self.rt_plot.update_spectrum()
+        self.rt_plot.progress_spectrum_anim()
+        # self.rt_plot.update_spectrum()
 
     def plot_fitter(self):
         """
