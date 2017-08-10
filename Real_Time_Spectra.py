@@ -396,6 +396,7 @@ class Real_Time_Spectra(object):
                                                      self.update_waterfall,
                                                     #  init_func=self.plot_waterfall,
                                                      interval=1,
+                                                     save_count=0,
                                                      blit=True)
 
             '''
@@ -667,6 +668,7 @@ class Real_Time_Spectra(object):
                                                      self.update_spectrum,
                                                     #  init_func=self.plot_spectrum,
                                                      interval=1,
+                                                     save_count=0,
                                                      blit=True)
 
             '''
