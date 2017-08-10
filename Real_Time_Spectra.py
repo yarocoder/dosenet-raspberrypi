@@ -782,6 +782,11 @@ class Real_Time_Spectra(object):
         '''
         self.spectrum_plot.set_data(self.spectrum_bins, avg_data)
 
+        '''
+        Set a logarithmic y-scale.
+        '''
+        plt.yscale('log')
+
         # '''
         # Show the spectrum graph.
         # '''
